@@ -1,3 +1,10 @@
+import sys
+sys.path.append('egor@egor-laptop:~/Work/new_room_navigation/')
+
+from modules.from_file import graph_from_file
+from modules.dijkstra import dijkstra
+
+
 def get_summa_p(start, end, address, room_level):
     def val(i, array_points):
         point_pos = array_points.index(i) + 1
@@ -57,6 +64,3 @@ def checking_nearby_points(address, sr_param, repeat_name, level):
 
 
     return min
-
-
-checking_nearby_points("school_3", {'number': 32, 'name': 'Кабинет директора', 'level': 1}, "Лестница", 1)
