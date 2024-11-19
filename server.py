@@ -1,6 +1,6 @@
 from flask import Flask, request, send_file, jsonify
 import json
-from main import main_to_server
+from main import main
 import os
  
 app = Flask(__name__)
@@ -9,8 +9,8 @@ SAVE_FOLDER = '/home/egor/Work/new_room_navigation/data_from_user'
 
 arr = os.listdir("result")
 
-PHOTO_1_PATH = f'client_data/{arr[0]}'
-PHOTO_2_PATH = f'client_data/{arr[1]}'
+PHOTO_1_PATH = f'resukt/{arr[0]}'
+PHOTO_2_PATH = f'result/{arr[1]}'
 os.makedirs(SAVE_FOLDER, exist_ok=True)
 
 @app.route('/upload', methods=['POST'])
@@ -22,11 +22,11 @@ def upload_file():
         data = request.get_json(force=True)  # force=True для извлечения JSON без проверки Content-Type
         
         # Сохраняем JSON в файл
-        file_path = os.path.join(SAVE_FOLDER, 'received_data.json')
+        file_path = os.path.join(SAVE_FOLDER, 'data.json')
         with open(file_path, 'w') as json_file:
             json.dump(data, json_file, ensure_ascii=False, indent=4)
 
-        result = main_to_server()
+        main()
         
         return jsonify({"message": "JSON файл успешно сохранен"}), 200
     except Exception as e:
