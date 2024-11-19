@@ -4,17 +4,16 @@ sys.path.append('egor@egor-laptop:~/Work/new_room_navigation')
 from modules.print_image import draw_path_on_map, save_image
 from modules.repeat_points import checking_nearby_points
 from modules.room_param import get_room_param
+from modules.get_data import get_data
 
 
 # основная функция
 def main():
-	# address = input("Address: ").lower()
-	# start_room_name = input("Start room name: ").lower()
-	# end_room_name = input("End room name: ").lower()
+    data = get_data()
 
-    address = "school_3"
-    start_room_name = "кабинет завуча"
-    end_room_name = "Кабинет физики"
+    address = data['address']
+    start_room_name = data['start_room_name']
+    end_room_name = data['end_room_name']
 
     sr_param = get_room_param(start_room_name, address) # [number, name, level]
     er_param = get_room_param(end_room_name, address)
