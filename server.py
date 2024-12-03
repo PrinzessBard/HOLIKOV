@@ -9,7 +9,7 @@ SAVE_FOLDER = '/home/egor/Work/new_room_navigation/data_from_user'
 
 arr = os.listdir("result")
 
-PHOTO_1_PATH = f'resukt/{arr[0]}'
+PHOTO_1_PATH = f'result/{arr[0]}'
 PHOTO_2_PATH = f'result/{arr[1]}'
 os.makedirs(SAVE_FOLDER, exist_ok=True)
 

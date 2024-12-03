@@ -32,4 +32,4 @@ def save_image(address, room_level,  sr_number, er_number):
 
     cv2.imwrite(output_file, result_image)
 
-    os.system(f'xdg-open {output_file}') 
+    # os.system(f'xdg-open {output_file}') 

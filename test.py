@@ -1,18 +1,6 @@
-import sys
-sys.path.append('egor@egor-laptop:~/Work/new_room_navigation')
+import requests
 
-import json
-
-
-def get_data():
-    with open('data_from_user/data.json', 'r', encoding='utf-8') as fh: #открываем файл на чтение
-        data = json.load(fh)  #загружаем из файла данные в словарь data
-
-    for key, item in data.items():
-        item = item.lower()
-        data[key] = item 
-
-    print( data )
-
-
-get_data()
+r = requests.post("http://127.0.0.1:5000/upload", json={"address": "school_3","start_room_name": "Кабинет директора","end_room_name": "Центр инифиатв"})
+hui = requests.get("http://127.0.0.1:5000/photo1")
+with open('hui.png', 'wb') as file:
+    file.write(hui.content)
