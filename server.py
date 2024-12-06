@@ -1,3 +1,6 @@
+# import sys
+# sys.path.append('egor@egor-laptop:~/Work/new_room_navigation')
+
 from flask import Flask, request, send_file, jsonify
 import json
 from main import main
@@ -36,12 +39,17 @@ def upload_file():
 
 @app.route('/photo1', methods=['GET'])
 def get_photo1():
-    return send_file(PHOTO_1_PATH, mimetype='image/jpeg')
+    s = send_file(PHOTO_1_PATH, mimetype='image/jpeg')
+    # os.remove(PHOTO_1_PATH)
+    return s
 
 @app.route('/photo2', methods=['GET'])
 def get_photo2():
     return send_file(PHOTO_2_PATH, mimetype='image/jpeg')
 
+# @app.route('/photo', methods=['GET'])
+# def get_photo():
+#     return send_file(PHOTO_PATH, mimetype='image/jpeg')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
