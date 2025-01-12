@@ -18,14 +18,15 @@ def main():
     sr_param = get_room_param(start_room_name, address) # [number, name, level]
     er_param = get_room_param(end_room_name, address)
 
-    ladder = checking_nearby_points(address, sr_param, "Лестница", sr_param['level'])
+    ladder_1 = checking_nearby_points(address, sr_param, "Лестница", sr_param['level'])
+    ladder_2 = checking_nearby_points(address, er_param, "Лестница", er_param['level'])
 
     if sr_param['level'] != er_param['level']:
         for i in range(1, 3):
             if i == 1:
-                save_image(address, sr_param['level'], sr_param['number'], ladder)
+                save_image(address, sr_param['level'], sr_param['number'], ladder_1)
             else:
-                save_image(address, er_param['level'], ladder, er_param['number'])                  
+                save_image(address, er_param['level'], ladder_2, er_param['number'])                  
     else:
         save_image(address, sr_param['level'], sr_param['number'], er_param['number'])
 
