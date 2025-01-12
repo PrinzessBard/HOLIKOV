@@ -1,4 +1,8 @@
+import sys
+sys.path.append('egor@egor-laptop:~/Work/new_room_navigation/')
+
 import jellyfish
+from modules.get_way import get_way
 
 def similar(first, second):
     first = first.replace(' ', '')
@@ -12,7 +16,7 @@ def similar(first, second):
 # Параметры помещения
 def get_room_param(r_name, address):
 	d = []
-	with open(f"/home/egor/Work/new_room_navigation/building/{address}/parametres.txt", encoding="utf-8") as file:
+	with open(f"{get_way('file')}/building/{address}/parametres.txt", encoding="utf-8") as file:
 	    for line in file:
 	        value = line.split() # ['1', 'Вход_1', '1']
 	        dict = {"number": int(value[0]), "name": value[1], "level": int(value[2])}

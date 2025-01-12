@@ -1,14 +1,15 @@
-# import sys
-# sys.path.append('egor@egor-laptop:~/Work/new_room_navigation')
+import sys
+sys.path.append('egor@egor-laptop:~/Work/new_room_navigation')
 
 from flask import Flask, request, send_file, jsonify
 import json
 from main import main
 import os
+from modules.get_way import get_way
  
 app = Flask(__name__)
 
-SAVE_FOLDER = '/home/egor/Work/new_room_navigation/data_from_user'
+SAVE_FOLDER = f'{get_way('file')}/data_from_user'
 
 arr = os.listdir("result")
 

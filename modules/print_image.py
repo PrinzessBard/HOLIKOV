@@ -6,6 +6,7 @@ import os
 from modules.from_file import graph_from_file, coordinates_from_file
 from modules.dijkstra import dijkstra
 from modules.room_param import get_room_param
+from modules.get_way import get_way
 import requests
 import json
 
@@ -20,7 +21,7 @@ def draw_pos_user(address, image, level):
 
     number = room_param['number']
     needNumber = 0
-    coordinates = coordinates_from_file(f'/home/egor/Work/new_room_navigation/building/{address}/data/level_{room_param['level']}/coordinates.txt')
+    coordinates = coordinates_from_file(f'{get_way('file')}/building/{address}/data/level_{room_param['level']}/coordinates.txt')
     for key, item in coordinates.items():
         if key == room_param['number']:
             needNumber = item
@@ -56,9 +57,9 @@ def draw_path_on_map(image, path, coordinates):
 
 # Сохранение готового пути
 def save_image(address, room_level,  sr_number, er_number):
-    graph = graph_from_file(f'/home/egor/Work/new_room_navigation/building/{address}/data/level_{room_level}/graph.txt')
-    coordinates = coordinates_from_file(f'/home/egor/Work/new_room_navigation/building/{address}/data/level_{room_level}/coordinates.txt')
-    image = cv2.imread(f'/home/egor/Work/new_room_navigation/building/{address}/image/level_{room_level}.jpg')
+    graph = graph_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/graph.txt')
+    coordinates = coordinates_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/coordinates.txt')
+    image = cv2.imread(f'{get_way('file')}/building/{address}/image/level_{room_level}.jpg')
 
     path = dijkstra(graph, sr_number, er_number)
 
@@ -73,7 +74,7 @@ def save_image(address, room_level,  sr_number, er_number):
     else:
         result = result_circle[1]
 
-    output_file = f'/home/egor/Work/new_room_navigation/result/level_path_{room_level}.jpg'
+    output_file = f'{get_way('file')}/result/level_path_{room_level}.jpg'
 
     cv2.imwrite(output_file, result)
 

@@ -3,7 +3,7 @@ sys.path.append('egor@egor-laptop:~/Work/new_room_navigation/')
 
 from modules.from_file import graph_from_file
 from modules.dijkstra import dijkstra
-
+from modules.get_way import get_way
 
 def get_summa_p(start, end, address, room_level):
     def val(i, array_points):
@@ -14,7 +14,7 @@ def get_summa_p(start, end, address, room_level):
             number = array_points[(array_points.index(i) + 1)]
             return number
 
-    graph = graph_from_file(f'/home/egor/Work/new_room_navigation/building/{address}/data/level_{room_level}/graph.txt')
+    graph = graph_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/graph.txt')
 
     summa = 0
     array_points = dijkstra(graph, start, end)
@@ -35,7 +35,7 @@ def get_summa_p(start, end, address, room_level):
 
 def checking_nearby_points(address, sr_param, repeat_name, level):
     d = []
-    with open(f"/home/egor/Work/new_room_navigation/building/{address}/parametres.txt", encoding="utf-8") as file:
+    with open(f"{get_way('file')}/building/{address}/parametres.txt", encoding="utf-8") as file:
         for line in file:
             value = line.split() # ['1', 'Вход_1', '1']
             if value[1] == repeat_name and value[2] == str(level):
