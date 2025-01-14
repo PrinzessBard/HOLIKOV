@@ -13,3 +13,4 @@ def get_address(latitude, longitude): # {"latitude": 53.6638986476154, "longitud
     address = address.replace(" ","")
     #ОрловскаяобластьБолховскийрайонгородБолховПервомайскаяулица145
     print(address)
+    return address
