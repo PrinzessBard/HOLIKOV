@@ -9,7 +9,8 @@ def get_data():
 		data = json.load(fh)  #загружаем из файла данные в словарь data
 
 	for key, item in data.items():
-		item = item.lower()
+		# item = item.lower()
 		data[key] = item 
 
-	return data
+	return data # {'coordinates': {'latitude': '53.6638986476154', 'longitude': '36.4019112515019'}, 'start_room_name': 'гостиная', 'end_room_name': 'серверная'}
+

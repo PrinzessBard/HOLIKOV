@@ -5,15 +5,20 @@ from modules.print_image import draw_path_on_map, save_image
 from modules.repeat_points import checking_nearby_points
 from modules.room_param import get_room_param
 from modules.get_data import get_data
+from modules.get_address import get_address
 
 
 # основная функция
 def main():
     data = get_data()
 
-    address = data['address']
-    start_room_name = data['start_room_name']
-    end_room_name = data['end_room_name']
+    latitude = data["coordinates"]['latitude']
+    longitude = data["coordinates"]['longitude']
+
+    address = get_address(latitude, longitude)
+    # address = "house"
+    start_room_name = data['start_room_name'].lower()
+    end_room_name = data['end_room_name'].lower()
 
     sr_param = get_room_param(start_room_name, address) # [number, name, level]
     er_param = get_room_param(end_room_name, address)
