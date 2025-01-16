@@ -7,24 +7,14 @@ from modules.from_file import graph_from_file, coordinates_from_file
 from modules.dijkstra import dijkstra
 from modules.room_param import get_room_param
 from modules.get_way import get_way
-import requests
-import json
+from modules.getUserPos import get_user_pos
 
 
 def draw_pos_user(address, image, level):
-    hui = requests.get("http://217.171.146.102:8003/api/v1/location_basic/house/test")
-    data = json.loads(hui.content)
-    room_param = get_room_param(data['data']['loc'], address)
+    needNumber = get_user_pos(address, "coordinates", level)
 
-    if(room_param['level'] != level):
-        return [0, 0]
-
-    number = room_param['number']
-    needNumber = 0
-    coordinates = coordinates_from_file(f'{get_way('file')}/building/{address}/data/level_{room_param['level']}/coordinates.txt')
-    for key, item in coordinates.items():
-        if key == room_param['number']:
-            needNumber = item
+    if needNumber == [0, 0]:
+        return needNumber
 
     # image = cv2.imread(f'/home/egor/Work/new_room_navigation/building/{address}/image/level_{room_param['level']}.jpg')
 
@@ -56,7 +46,7 @@ def draw_path_on_map(image, path, coordinates):
 
 
 # Сохранение готового пути
-def save_image(address, room_level,  sr_number, er_number):
+def save_image(address, room_level,  sr_number, er_number, status):
     graph = graph_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/graph.txt')
     coordinates = coordinates_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/coordinates.txt')
     image = cv2.imread(f'{get_way('file')}/building/{address}/image/level_{room_level}.jpg')
@@ -70,6 +60,8 @@ def save_image(address, room_level,  sr_number, er_number):
     result_circle = draw_pos_user(address, result_image, room_level)
 
     if result_circle[0] == 0:
+        result = result_image
+    elif status == 0:
         result = result_image
     else:
         result = result_circle[1]
