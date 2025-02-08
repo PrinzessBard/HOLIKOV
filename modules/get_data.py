@@ -5,8 +5,11 @@ import json
 
 
 def get_data():
-	with open('data_from_user/data.json', 'r', encoding='utf-8') as fh: #открываем файл на чтение
-		data = json.load(fh)  #загружаем из файла данные в словарь data
+	try:
+		with open('data_from_user/data.json', 'r', encoding='utf-8') as fh: #открываем файл на чтение
+			data = json.load(fh)  #загружаем из файла данные в словарь data
+	except FileNotFoundError:
+		print("FileNotFoundError (get_data)")
 
 	for key, item in data.items():
 		# item = item.lower()

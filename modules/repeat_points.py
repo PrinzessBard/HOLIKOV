@@ -35,14 +35,17 @@ def get_summa_p(start, end, address, room_level):
 
 def checking_nearby_points(address, sr_param, repeat_name, level):
     d = []
-    with open(f"{get_way('file')}/building/{address}/parametres.txt", encoding="utf-8") as file:
-        for line in file:
-            value = line.split() # ['1', 'Вход_1', '1']
-            if value[1] == repeat_name and value[2] == str(level):
-                dict = {"number": int(value[0]), "name": value[1], "level": int(value[2])}
-                d.append(dict)
-            else:
-                continue
+    try:
+        with open(f"{get_way('file')}/building/{address}/parametres.txt", encoding="utf-8") as file:
+            for line in file:
+                value = line.split() # ['1', 'Вход_1', '1']
+                if value[1] == repeat_name and value[2] == str(level):
+                    dict = {"number": int(value[0]), "name": value[1], "level": int(value[2])}
+                    d.append(dict)
+                else:
+                    continue
+    except FileNotFoundError:
+        print("file not found (checking_nearby_points)")
 
 
     weight_value = {}

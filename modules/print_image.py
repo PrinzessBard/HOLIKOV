@@ -16,8 +16,6 @@ def draw_pos_user(address, image, level):
     if needNumber == [0, 0]:
         return needNumber
 
-    # image = cv2.imread(f'/home/egor/Work/new_room_navigation/building/{address}/image/level_{room_param['level']}.jpg')
-
     circle = cv2.circle(
 	    image, # the image on which you want to draw a circle
 	    needNumber, # centre coordinates
@@ -28,12 +26,7 @@ def draw_pos_user(address, image, level):
 
     return [1, circle]
 
-    # output_file = f'/home/egor/Work/new_room_navigation/result/level_path_{level}.jpg'
 
-#    cv2.imwrite(output_file, circle)
-
-
-# Прорисовка пути на макете
 def draw_path_on_map(image, path, coordinates):
     for i in range(len(path) - 1):
         start_room = path[i]
@@ -52,8 +45,6 @@ def save_image(address, room_level,  sr_number, er_number, status):
     image = cv2.imread(f'{get_way('file')}/building/{address}/image/level_{room_level}.jpg')
 
     path = dijkstra(graph, sr_number, er_number)
-
-    result = 0
 
     result_image = draw_path_on_map(image, path, coordinates)
 

@@ -1,7 +1,9 @@
 def get_way(key):
-
-    with open('/home/egor/Work/new_room_navigation/file_way.txt', 'r') as file:
-        lines = file.readlines()
+    try:
+        with open('/home/egor/Work/new_room_navigation/file_way.txt', 'r') as file:
+            lines = file.readlines()
+    except FileNotFoundError:
+        print("file not found get way")
 
     symbols_to_remove = '\n'
 

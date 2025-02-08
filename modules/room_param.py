@@ -16,11 +16,14 @@ def similar(first, second):
 # Параметры помещения
 def get_room_param(r_name, address):
 	d = []
-	with open(f"{get_way('file')}/building/{address}/parametres.txt", encoding="utf-8") as file:
-	    for line in file:
-	        value = line.split() # ['1', 'Вход_1', '1']
-	        dict = {"number": int(value[0]), "name": value[1], "level": int(value[2])}
-	        d.append(dict)
+	try:
+		with open(f"{get_way('file')}/building/{address}/parametres.txt", encoding="utf-8") as file:
+			for line in file:
+				value = line.split() # ['1', 'Вход_1', '1']
+				dict = {"number": int(value[0]), "name": value[1], "level": int(value[2])}
+				d.append(dict)
+	except FileNotFoundError:
+		print("File not found (get_room_param)")
 
 	for item in d:
 	    if similar(item["name"], r_name):

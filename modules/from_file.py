@@ -1,9 +1,12 @@
 def graph_from_file(file):
     graph = {}
-    with open(file, encoding="utf-8") as file:
-        for line in file:
-            key, *value = line.split()
-            graph[key] = value
+    try:
+        with open(file, encoding="utf-8") as file:
+            for line in file:
+                key, *value = line.split()
+                graph[key] = value
+    except FileNotFoundError:
+        print("FileNotFoundError graph_from_file")
 
     new_graph = {}
     for key, item in graph.items():
@@ -27,10 +30,13 @@ def graph_from_file(file):
 # Функция для получения словаря координат из файла
 def coordinates_from_file(file):
     coordinates = {}
-    with open(file, encoding="utf-8") as file:
-        for line in file:
-            key, *value = line.split()
-            coordinates[key] = value
+    try:
+        with open(file, encoding="utf-8") as file:
+            for line in file:
+                key, *value = line.split()
+                coordinates[key] = value
+    except FileNotFoundError:
+        print("FileNotFoundError graph_from_file")
 
     new_coordinates = {}
     for key, item in coordinates.items():
