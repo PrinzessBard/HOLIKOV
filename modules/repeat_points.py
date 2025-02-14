@@ -1,5 +1,5 @@
 import sys
-sys.path.append('egor@egor-laptop:~/Work/new_room_navigation/')
+sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
 
 from modules.from_file import graph_from_file
 from modules.dijkstra import dijkstra

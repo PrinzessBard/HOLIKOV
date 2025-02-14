@@ -1,5 +1,5 @@
 import sys
-sys.path.append('egor@egor-laptop:~/Work/new_room_navigation/')
+sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
 
 from modules.from_file import coordinates_from_file
 from modules.room_param import get_room_param
@@ -9,7 +9,7 @@ import json
 
 def get_user_pos(address, status, level=None):
     try:
-        hui = requests.get("http://217.171.146.102:8003/api/v1/location_basic/house/test")
+        hui = requests.get("http://92.255.111.193:8003/api/v1/location_basic/house/test")
         data = json.loads(hui.content)
 
         room_param = get_room_param(data['data']['loc'], address)

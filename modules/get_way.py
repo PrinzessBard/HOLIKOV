@@ -1,6 +1,6 @@
 def get_way(key):
     try:
-        with open('/home/egor/Work/new_room_navigation/file_way.txt', 'r') as file:
+        with open('/home/prinzessbard/Work/HOLIKOV/file_way.txt', 'r') as file:
             lines = file.readlines()
     except FileNotFoundError:
         print("file not found get way")
