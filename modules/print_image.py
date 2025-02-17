@@ -1,5 +1,6 @@
 import sys
-sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+# sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+sys.path.append('root@4258309-vt02952:~/HOLIKOV')
 
 import cv2
 import os
@@ -57,7 +58,7 @@ def save_image(address, room_level,  sr_number, er_number, status):
     else:
         result = result_circle[1]
 
-    output_file = f'{get_way('file')}/result/level_path_{room_level}.jpg'
+    output_file = f'{get_way('file')}/result/level_path_{status}.jpg'
 
     cv2.imwrite(output_file, result)
 

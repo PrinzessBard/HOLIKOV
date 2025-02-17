@@ -1,56 +1,58 @@
 import sys
-sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+# sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+sys.path.append('root@4258309-vt02952:~/HOLIKOV')
 
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, send_file, jsonify, send_from_directory, make_response
+from flask_cors import CORS
 import json
 from main import main
 import os
+import time
 from modules.get_way import get_way
  
 app = Flask(__name__)
+CORS(app)
 
 SAVE_FOLDER = get_way('file') + '/data_from_user'
-
-arr = os.listdir("result")
-
-PHOTO_1_PATH = f'result/{arr[0]}'
-PHOTO_2_PATH = f'result/{arr[1]}'
-os.makedirs(SAVE_FOLDER, exist_ok=True)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
     print("Headers:", request.headers)
     print("Request Data:", request.data)
 
-    try:
-        data = request.get_json(force=True)  # force=True для извлечения JSON без проверки Content-Type
+    data = request.get_json(force=True)  # force=True для извлечения JSON без проверки Content-Type
         
-        # Сохраняем JSON в файл
-        file_path = os.path.join(SAVE_FOLDER, 'data.json')
-        with open(file_path, 'w') as json_file:
-            json.dump(data, json_file, ensure_ascii=False, indent=4)
+    # Сохраняем JSON в файл
+    file_path = os.path.join(SAVE_FOLDER, 'data.json')
+    with open(file_path, 'w') as json_file:
+        json.dump(data, json_file, ensure_ascii=False, indent=4)
 
-        main()
+    main()
         
-        return jsonify({"message": "JSON файл успешно сохранен"}), 200
-    except Exception as e:
-        print("Ошибка:", str(e))
-        return jsonify({"error": "Ошибка обработки JSON"}), 400
+    return jsonify({"message": "JSON файл успешно сохранен"}), 200
 
 
 @app.route('/photo1', methods=['GET'])
 def get_photo1():
-    s = send_file(PHOTO_1_PATH, mimetype='image/jpeg')
-    # os.remove(PHOTO_1_PATH)
-    return s
+    response = make_response(send_from_directory('result', 'level_path_1.jpg'))
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    # Добавляем уникальный идентификатор файла
+    response.headers["X-File-Id"] = str(os.path.getmtime('result/level_path_1.jpg'))
+    return response
+
 
 @app.route('/photo2', methods=['GET'])
 def get_photo2():
-    return send_file(PHOTO_2_PATH, mimetype='image/jpeg')
+    response = make_response(send_from_directory('result', 'level_path_2.jpg'))
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    # Добавляем уникальный идентификатор файла
+    response.headers["X-File-Id"] = str(os.path.getmtime('result/level_path_2.jpg'))
+    return response
 
-# @app.route('/photo', methods=['GET'])
-# def get_photo():
-#     return send_file(PHOTO_PATH, mimetype='image/jpeg')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
