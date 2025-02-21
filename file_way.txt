@@ -1,2 +1,2 @@
 egor@egor-laptop:~/Work/new_room_navigation
-~/HOLIKOV
+/home/prinzessbard/Work/HOLIKOV

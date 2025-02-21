@@ -1,6 +1,6 @@
 import sys
-# sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
-sys.path.append('root@4258309-vt02952:~/HOLIKOV')
+sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+# sys.path.append('root@4258309-vt02952:~/HOLIKOV')
 
 from modules.print_image import draw_path_on_map, save_image
 from modules.repeat_points import checking_nearby_points
@@ -37,9 +37,12 @@ def main():
             if i == 1:
                 save_image(address, sr_param['level'], sr_param['number'], ladder_1, i)
             else:
-                save_image(address, er_param['level'], ladder_2, er_param['number'], i)                  
+                save_image(address, er_param['level'], ladder_2, er_param['number'], i)    
+
+        return (sr_param['level'], er_param['level'])              
     else:
         save_image(address, sr_param['level'], sr_param['number'], er_param['number'], 1)
+        return (sr_param['level'], er_param['level'])    
     # except TypeError:
     #     print("type error (main)")
 

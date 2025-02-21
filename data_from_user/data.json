@@ -1,8 +1,8 @@
 {
     "coordinates": {
-        "latitude": "53.45167913719746",
-        "longitude": "\"35.99651590069165\""
+        "latitude": "53.45162229736113",
+        "longitude": "\"35.99646337330341\""
     },
-    "start_room_name": "Мастерская",
-    "end_room_name": "Гостиная"
+    "start_room_name": "user",
+    "end_room_name": "Мастерская"
 }

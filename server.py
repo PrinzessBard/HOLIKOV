@@ -1,6 +1,6 @@
 import sys
-# sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
-sys.path.append('root@4258309-vt02952:~/HOLIKOV')
+sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+# sys.path.append('root@4258309-vt02952:~/HOLIKOV')
 
 from flask import Flask, request, send_file, jsonify, send_from_directory, make_response
 from flask_cors import CORS
@@ -27,9 +27,11 @@ def upload_file():
     with open(file_path, 'w') as json_file:
         json.dump(data, json_file, ensure_ascii=False, indent=4)
 
-    main()
+    level = main()
+
+    print(data["start_room_name"])
         
-    return jsonify({"message": "JSON файл успешно сохранен"}), 200
+    return jsonify({"message": level}), 200
 
 
 @app.route('/photo1', methods=['GET'])
