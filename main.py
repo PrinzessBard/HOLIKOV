@@ -1,13 +1,13 @@
 import sys
-sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
-# sys.path.append('root@4258309-vt02952:~/HOLIKOV')
+# sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+sys.path.append('root@4258309-vt02952:~/HOLIKOV')
 
 from modules.print_image import draw_path_on_map, save_image
 from modules.repeat_points import checking_nearby_points
 from modules.room_param import get_room_param
 from modules.get_data import get_data
 from modules.get_address import get_address
-from modules.getUserPos import get_user_pos
+from modules.getUserPos import get_user_pkos
 
 
 # основная функция
