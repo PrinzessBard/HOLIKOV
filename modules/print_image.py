@@ -1,6 +1,6 @@
 import sys
-# sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
-sys.path.append('root@4258309-vt02952:~/HOLIKOV')
+sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+# sys.path.append('root@4258309-vt02952:~/HOLIKOV')
 
 import cv2
 import os
@@ -40,26 +40,60 @@ def draw_path_on_map(image, path, coordinates):
 
 
 # Сохранение готового пути
-def save_image(address, room_level,  sr_number, er_number, status):
+# def save_image(address, room_level,  sr_number, er_number, status, iter, iter_name=None):
+#     graph = graph_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/graph.txt')
+#     coordinates = coordinates_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/coordinates.txt')
+#     image = cv2.imread(f'{get_way('file')}/building/{address}/image/level_{room_level}.jpg')
+
+#     path = dijkstra(graph, sr_number, er_number)
+
+#     result_image = draw_path_on_map(image, path, coordinates)
+
+#     result_circle = draw_pos_user(address, result_image, room_level)
+
+
+#     if result_circle[0] == 0:
+#         result = result_image
+#     elif status == 0:
+#         result = result_image
+#     else:
+#         result = result_circle[1]
+
+#     output_file = f'{get_way('file')}/result/level_path_{status}.jpg'
+
+#     cv2.imwrite(output_file, result)
+
+#     os.system(f'xdg-open {output_file}') 
+
+
+def save_image(address, room_level,  sr_number, er_number, status, iter, iter_name=None):
     graph = graph_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/graph.txt')
     coordinates = coordinates_from_file(f'{get_way('file')}/building/{address}/data/level_{room_level}/coordinates.txt')
     image = cv2.imread(f'{get_way('file')}/building/{address}/image/level_{room_level}.jpg')
 
-    path = dijkstra(graph, sr_number, er_number)
+    result = None
 
-    result_image = draw_path_on_map(image, path, coordinates)
+    if iter:
+        path = dijkstra(graph, sr_number, iter_name)
 
-    result_circle = draw_pos_user(address, result_image, room_level)
+        result_image = draw_path_on_map(image, path, coordinates)
+        result_circle = draw_pos_user(address, result_image, room_level)
 
-    if result_circle[0] == 0:
-        result = result_image
-    elif status == 0:
-        result = result_image
+        path = dijkstra(graph, iter_name, er_number)
+        result = draw_path_on_map(result_circle[1], path, coordinates)
+    
     else:
-        result = result_circle[1]
+        path = dijkstra(graph, sr_number, er_number)
 
+        result_image = draw_path_on_map(image, path, coordinates)
+
+        result_circle = draw_pos_user(address, result_image, room_level)
+        result = result_circle[1]
+    
     output_file = f'{get_way('file')}/result/level_path_{status}.jpg'
 
     cv2.imwrite(output_file, result)
 
     os.system(f'xdg-open {output_file}') 
+
+

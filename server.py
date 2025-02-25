@@ -1,6 +1,6 @@
 import sys
-# sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
-sys.path.append('root@4258309-vt02952:~/HOLIKOV')
+sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+# sys.path.append('root@4258309-vt02952:~/HOLIKOV')
 
 from flask import Flask, request, send_file, jsonify, send_from_directory, make_response
 from flask_cors import CORS
@@ -8,6 +8,10 @@ import json
 from main import main
 import os
 import time
+from modules.get_way import get_way
+from modules.get_all_room import get_all_room
+from modules.get_address import get_address
+from modules.get_data import get_data
 from modules.get_way import get_way
  
 app = Flask(__name__)
@@ -33,6 +37,27 @@ def upload_file():
         
     return jsonify({"message": level}), 200
 
+
+@app.route('/list', methods=['GET'])
+def get_list():
+    data = get_data()
+    address = get_address(data['coordinates']['latitude'], data['coordinates']['longitude'])
+    file = get_way('file') + f'/building/{address}/parametres.txt'
+    rooms = get_all_room(file, 'level' ,'1')
+
+    return jsonify({"message": rooms}), 200
+
+
+
+@app.route('/default', methods=['GET'])
+def get_photo_default():
+    response = make_response(send_from_directory('result', 'level_path_0.jpg'))
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    # Добавляем уникальный идентификатор файла
+    response.headers["X-File-Id"] = str(os.path.getmtime('result/level_path_0.jpg'))
+    return response
 
 @app.route('/photo1', methods=['GET'])
 def get_photo1():

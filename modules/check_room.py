@@ -15,7 +15,3 @@ def check_room(room, latitude, longitude):
             return True
         
     return False
-
-
-print(check_room("Лифт", "53.45162229736113", "35.99646337330341"))
-
