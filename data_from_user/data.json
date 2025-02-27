@@ -1,11 +1,11 @@
 {
     "coordinates": {
-        "latitude": "53.45162229736113",
-        "longitude": "\"35.99646337330341\""
+        "latitude": "56.81745",
+        "longitude": "60.63968"
     },
-    "start_room_name": "user",
-    "end_room_name": "гостиная",
-    "iter_room_name": "серверная",
-    "isDisabled": false,
-    "isBag": true
+    "start_room_name": "Лесница ",
+    "end_room_name": "Холл_сектор_1",
+    "iter_room_name": "",
+    "isBag": false,
+    "isDisabled": false
 }

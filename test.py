@@ -1,21 +1,6 @@
-import sys
-sys.path.append('prinzessbard@prinzessbard-laptop:~/Work/HOLIKOV')
+import requests
+import json
 
-from modules.get_all_room import get_all_room
-from modules.get_address import get_address
-from modules.get_way import get_way
-
-def check_room(room, latitude, longitude):
-    address = get_address(latitude, longitude)
-    file = get_way('file') + f'/building/{address}/parametres.txt'
-    rooms = get_all_room(file, 'l')
-
-    for i in rooms:
-        if room == i:
-            return True
-        
-    return False
-
-
-print(check_room("Лифт", "53.45162229736113", "35.99646337330341"))
-
+res = requests.get("http://92.255.111.193:8003/api/v1/location_basic/level/test")
+data = json.loads(res.content)
+print(data)

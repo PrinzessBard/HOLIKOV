@@ -30,15 +30,18 @@ def main():
     sr_param = get_room_param(start_room_name, address) # [number, name, level]
     er_param = get_room_param(end_room_name, address)
 
-    isLift = check_room("Лифт", "53.45162229736113", "35.99646337330341")
+    isLift = check_room("Лифт", "56.818755", "60.638777")
 
-    # ladder = "Лифт" if data['isBag'] or data['isDisabled'] and isLift else "Лестница", sr_param['level']
-    ladder = "Лестница"
+    ladder = "Лифт" if data['isBag'] or data['isDisabled'] and isLift else "лестница"
+
+    # ladder_1 = "Лестница"
+    # ladder_2 = "Лестница"
 
     ladder_1 = checking_nearby_points(address, sr_param, ladder, sr_param['level'])
     ladder_2 = checking_nearby_points(address, er_param, ladder, er_param['level'])
 
     iter_name = get_room_param(data['iter_room_name'], address)['number'] if data['iter_room_name'] != "" else None
+    # print("Iter name: ", iter_name if iter_name != None else "")
 
     if sr_param['level'] != er_param['level']:
         for i in range(1, 3):
@@ -49,7 +52,7 @@ def main():
 
         return (sr_param['level'], er_param['level'])              
     else:
-        save_image(address, sr_param['level'], sr_param['number'], er_param['number'], 1, True if iter_name != None else false, iter_name if iter_name != None else "")
+        save_image(address, sr_param['level'], sr_param['number'], er_param['number'], 1, True if iter_name != None else False, iter_name if iter_name != None else "")
         return (sr_param['level'], er_param['level'])    
     # except TypeError:
     #     print("type error (main)")
